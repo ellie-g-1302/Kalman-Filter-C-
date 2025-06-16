@@ -16,6 +16,7 @@ class KalmanFilter {
 
       // Variables
       vector<vector<float>> predicted_x(n, vector<float>(1,0));
+      vector<vector<float>> measurement(n, vector<float>(1,0));
       vector<vector<float>> predicted_P(n, vector<float>(n,0));
       vector<vector<float>> K(n, vector<float>(n,0));
       vector<vector<float>> estimated_x(n, vector<float>(1,0));
@@ -33,7 +34,11 @@ class KalmanFilter {
           estimated_P = P;
       }
       ~KalmanFilter(){}
-      
+
+      void updateData(vector<vector<float>> z0){
+          measurement = z0;
+      }
+
       void predict_state(){
         predicted_x = matrix_multiplication(A_matrix, estimated_x);
         }
@@ -55,7 +60,7 @@ class KalmanFilter {
 
         }
       void estimate(){
-          vector<vector<float>> result = subtractMat(z_0, matrix_multiplication(H_matrix, predicted_x));
+          vector<vector<float>> result = subtractMat(measurement, matrix_multiplication(H_matrix, predicted_x));
           estimated_x = matrix_addition(pred_state, matrix_multiplication(kal_gain, result));
         }
         
