@@ -15,12 +15,12 @@ class KalmanFilter {
       int n; 
 
       // Variables
-      vector<vector<float>> predicted_x(n, vector<float>(1,0));
-      vector<vector<float>> measurement(n, vector<float>(1,0));
-      vector<vector<float>> predicted_P(n, vector<float>(n,0));
-      vector<vector<float>> K(n, vector<float>(n,0));
-      vector<vector<float>> estimated_x(n, vector<float>(1,0));
-      vector<vector<float>> estimated_P(n, vector<float>(n,0));
+      vector<vector<float>> predicted_x;
+      vector<vector<float>> measurement;
+      vector<vector<float>> predicted_P;
+      vector<vector<float>> K;
+      vector<vector<float>> estimated_x;
+      vector<vector<float>> estimated_P;
 
 
 
@@ -44,7 +44,7 @@ class KalmanFilter {
         }
         
       void predict_error_covariance(){
-          vector<vector<float>> result = matrix_multiplication(A_matrix, err_co_0);
+          vector<vector<float>> result = matrix_multiplication(A_matrix, predicted_P);
           predicted_P  = matrix_addition(matrix_multiplication(result, transposeMat(A_matrix)), Q_matrix);
         }
 
@@ -61,7 +61,7 @@ class KalmanFilter {
         }
       void estimate(){
           vector<vector<float>> result = subtractMat(measurement, matrix_multiplication(H_matrix, predicted_x));
-          estimated_x = matrix_addition(pred_state, matrix_multiplication(kal_gain, result));
+          estimated_x = matrix_addition(predicted_x, matrix_multiplication(K, result));
         }
         
       void compute_error_covariance(){
