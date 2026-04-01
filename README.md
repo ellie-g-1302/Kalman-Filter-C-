@@ -1,7 +1,8 @@
 # Kalman Filter
+A Kalman filter is an algorithm that takes in sensor measurements and filteres the data and estimates state variables. This program is written in C++ and is a basic Kalman filter. 
 
-
-# About
+# A Simple Example
+Say we have an accelerometer that measures the acceleration of gravity. Say we were to throw this accelerometer up in the air such that its entire trajectory was in free fall. The data is measurements we would expect to see around $9.81 m/s^2$
 
 
 # kalman_filer.h
