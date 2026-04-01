@@ -3,6 +3,7 @@ A Kalman filter is an algorithm that takes in sensor measurements and filteres t
 
 # A Simple Example
 Say we have an accelerometer that measures the acceleration of gravity. Say we were to throw this accelerometer up in the air such that its entire trajectory was in free fall. The data is measurements we would expect to see around $9.81 m/s^2$
+<img width="8000" height="4000" alt="Before" src="https://github.com/user-attachments/assets/ce60484d-7cc6-41c3-9f6e-1fc6fa6ed650" />
 
 
 # kalman_filer.h
