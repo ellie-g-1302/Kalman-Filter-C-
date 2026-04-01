@@ -2,9 +2,11 @@
 A Kalman filter is an algorithm that takes in sensor measurements and filteres the data and estimates state variables. This program is written in C++ and is a basic Kalman filter. 
 
 # A Simple Example
-Say we have an accelerometer that measures the acceleration of gravity. Say we were to throw this accelerometer up in the air such that its entire trajectory was in free fall. The data is measurements we would expect to see around $9.81 m/s^2$
+Say we have an accelerometer that measures the acceleration of gravity. Say we were to throw this accelerometer up in the air such that its entire trajectory was in free fall. The data is measurements we would expect to see around $9.81 \mathrm{m/s}^2$. What if when we plotted our data, we saw something like this:
 <img width="8000" height="4000" alt="Before" src="https://github.com/user-attachments/assets/ce60484d-7cc6-41c3-9f6e-1fc6fa6ed650" />
-
+Now obviously this is incorrect. We know that the value of gravitational acceleration is $9.81 \mathrm{m/s}^2$. We can use a Kalman filter to filter the data and find the true value of the measurements. When we do this, we get
+<img width="8000" height="4000" alt="after" src="https://github.com/user-attachments/assets/3e19d8da-7505-4fba-a1d6-5cc95dc7fa82" />
+Here we can see the green line which is the filtered data, and the black line which is the true value. 
 
 # kalman_filer.h
 This the header file that contains the actual Kalman filter algorithm and an example of the filter using Acceleration, gyroscope and magnetometer data to get attitude (although this was a work in progress and is not 100% correct. It still needs fine tuning). 
