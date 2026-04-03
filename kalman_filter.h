@@ -54,6 +54,7 @@ class KalmanFilter {
       void predict_error_covariance(){
           vector<vector<float>> result = matrix_multiplication(A_matrix, estimated_P);
           predicted_P  = matrix_addition(matrix_multiplication(result, transposeMat(A_matrix)), Q_matrix);
+      
         }
 
       
@@ -127,15 +128,23 @@ class KalmanFilter {
         }
       }
 
-      void KF(string InputFiles, string OutputFiles){
+      void KF(string InputFiles, string OutputFiles, vector<string> Header){
           ofstream myfile;
           myfile.open(OutputFiles);
           vector<vector<string>> measurement = readCSV(InputFiles);
+          for (int k = 0; k < Header.size(); k++){
+            myfile << Header[k] << " ";
+          }
+          myfile << endl;
           for (int i = 0; i <1000; i++){
             vector<vector<float>> z = {{stof(measurement[i][0])}};
             updateData(z);
             runKalmanFilter();
-            myfile << estimated_x[0][0] << endl;
+            for (int j = 0; j < estimated_x.size(); j++){
+              myfile << estimated_x[j][0] << " ";
+            }
+            myfile << endl;
+            
         }
         myfile.close();
       }
