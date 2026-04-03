@@ -69,13 +69,7 @@ class KalmanFilter {
 
       }
       void estimate(){
-        // for (int i = 0; i <  measurement.size(); i++){
-        //     for (int j = 0; j < measurement[0].size(); j++){
-        //       cout <<  measurement[i][j] << endl;
-        //     }
-        //   }
-          vector<vector<float>> result = subtractMat(measurement, matrix_multiplication(H_matrix, predicted_x));
-          
+          vector<vector<float>> result = subtractMat(measurement, matrix_multiplication(H_matrix, predicted_x));  
           estimated_x = matrix_addition(predicted_x, matrix_multiplication(K, result));
         }
         
@@ -83,14 +77,7 @@ class KalmanFilter {
           vector<vector<float>> result = matrix_multiplication(K, H_matrix);
           estimated_P = subtractMat(predicted_P, matrix_multiplication(result, predicted_P));
       }
-    
-      void runKalmanFilter(){
-          predict_state();
-          predict_error_covariance();
-          kalman_gain();
-          estimate();
-          compute_error_covariance();
-      }
+
             // Code for opening CSV from https://medium.com/@ryan_forrester_/reading-csv-files-in-c-how-to-guide-35030eb378ad
       vector<vector<string>> readCSV(const string& filename) {
         vector<vector<string>> data;
@@ -139,7 +126,11 @@ class KalmanFilter {
           for (int i = 0; i <1000; i++){
             vector<vector<float>> z = {{stof(measurement[i][0])}};
             updateData(z);
-            runKalmanFilter();
+            predict_state();
+            predict_error_covariance();
+            kalman_gain();
+            estimate();
+            compute_error_covariance();
             for (int j = 0; j < estimated_x.size(); j++){
               myfile << estimated_x[j][0] << " ";
             }
